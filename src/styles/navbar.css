@@ -36,30 +36,22 @@
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
   flex-shrink: 0;
   min-width: 0;
 }
 
 .nav-logo-icon {
-  width: 1.75rem;
-  height: 1.75rem;
-  border-radius: 0.5rem;
-  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: hsl(var(--primary-foreground));
-  font-weight: 700;
-  font-size: 0.75rem;
+  width: 2.5rem;
+  height: 2.5rem;
   flex-shrink: 0;
+  object-fit: contain;
 }
 
-.nav-logo-text {
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  white-space: nowrap;
+.nav-logo-name {
+  height: 6rem;
+  width: auto;
+  flex-shrink: 0;
+  object-fit: contain;
 }
 
 .nav-links {

@@ -7,8 +7,8 @@ import "@/styles/base.css";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/logo_icono.svg" />
+    <link rel="icon" href="/logo_icono.ico" />
     <meta name="robots" content="noindex" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,37 +32,13 @@ import "@/styles/base.css";
 <style is:global>
   :root {
     --bg: #ffffff;
-    --bg-card: #f8fafc;
-    --text: #0f172a;
-    --text-secondary: #475569;
-    --border: #e2e8f0;
-    --primary: #2563eb;
-    --accent: #0891b2;
-    --muted: #f1f5f9;
-  }
-
-  html:not(.light) {
-    --bg: #0b1121;
-    --bg-card: #111b2e;
-    --text: #f8fafc;
-    --text-secondary: #94a3b8;
-    --border: #1e293b;
-    --primary: #3b82f6;
-    --accent: #06b6d4;
-    --muted: #1e293b;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root:not(.light) {
-      --bg: #0b1121;
-      --bg-card: #111b2e;
-      --text: #f8fafc;
-      --text-secondary: #94a3b8;
-      --border: #1e293b;
-      --primary: #3b82f6;
-      --accent: #06b6d4;
-      --muted: #1e293b;
-    }
+    --bg-card: #ffffff;
+    --text: #000000;
+    --text-secondary: #333333;
+    --border: #e0e0e0;
+    --primary: #000000;
+    --accent: #000000;
+    --muted: #f5f5f5;
   }
 
   * {
@@ -77,14 +53,14 @@ import "@/styles/base.css";
 
   body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background-color: var(--bg);
-    color: var(--text);
+    background-color: #ffffff;
+    color: #000000;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
   }
 
   ::selection {
-    background-color: color-mix(in srgb, var(--primary) 30%, transparent);
+    background-color: #e0e0e0;
   }
 
   .legal-container {
@@ -93,47 +69,16 @@ import "@/styles/base.css";
     padding: 3rem 1.5rem 5rem;
   }
 
-  .legal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 3rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .legal-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    color: var(--text);
-    font-weight: 700;
-    font-size: 1.25rem;
-  }
-
-  .legal-logo-icon {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 0.5rem;
-    background: linear-gradient(135deg, var(--primary), var(--accent));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 800;
-  }
-
   .legal-title {
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
+    color: #000000;
   }
 
   .legal-date {
     font-size: 0.875rem;
-    color: var(--text-secondary);
+    color: #666666;
     margin-bottom: 2.5rem;
   }
 
@@ -145,7 +90,7 @@ import "@/styles/base.css";
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 0.75rem;
-    color: var(--primary);
+    color: #000000;
   }
 
   .legal-section h3 {
@@ -153,16 +98,17 @@ import "@/styles/base.css";
     font-weight: 600;
     margin-bottom: 0.5rem;
     margin-top: 1rem;
+    color: #000000;
   }
 
   .legal-section p {
     margin-bottom: 0.75rem;
-    color: var(--text-secondary);
+    color: #333333;
   }
 
   .legal-section ul {
     margin: 0.5rem 0 1rem 1.5rem;
-    color: var(--text-secondary);
+    color: #333333;
   }
 
   .legal-section li {
@@ -170,27 +116,6 @@ import "@/styles/base.css";
   }
 
   .legal-section strong {
-    color: var(--text);
-  }
-
-  .legal-back {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.625rem 1.25rem;
-    border-radius: 0.75rem;
-    border: 1px solid var(--border);
-    background: var(--bg-card);
-    color: var(--text);
-    text-decoration: none;
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: all 0.2s;
-    margin-top: 2rem;
-  }
-
-  .legal-back:hover {
-    border-color: var(--primary);
-    color: var(--primary);
+    color: #000000;
   }
 </style>

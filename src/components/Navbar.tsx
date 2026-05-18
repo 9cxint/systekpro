@@ -61,10 +61,8 @@ export default function Navbar() {
       <div className="nav-container">
         <div className="nav-inner">
           <a href="#" className="nav-logo">
-            <div className="nav-logo-icon">S</div>
-            <span className="nav-logo-text">
-              Sistek<span className="gradient-text">Pro</span>
-            </span>
+            <img src="/logo_icono.png" alt="Sistek" className="nav-logo-icon" />
+            <img src="/logo_name.png" alt="Sistek Pro" className="nav-logo-name" />
           </a>
 
           <nav className="nav-links">
