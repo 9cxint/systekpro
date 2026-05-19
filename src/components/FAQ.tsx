@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { IconChevronDown } from '@tabler/icons-react';
 
 const faqs = [
@@ -24,11 +23,11 @@ const faqs = [
   },
   {
     q: '¿Ofrecen garantía en sus servicios?',
-    a: 'Sí, todos nuestros servicios cuentan con garantía. Respadamos el trabajo realizado y los equipos que instalamos.'
+    a: 'Sí, todos nuestros servicios cuentan con garantía. Respalamos el trabajo realizado y los equipos que instalamos.'
   },
   {
     q: '¿Cómo puedo solicitar una cotización?',
-    a: 'Puedes llamarnos al 123 4513541, escribirnos por WhatsApp o llenar el formulario de contacto. Te responderemos a la mayor brevedad.'
+    a: 'Puedes llamarnos al +57 123 4513541, escribirnos por WhatsApp o llenar el formulario de contacto. Te responderemos a la mayor brevedad.'
   },
   {
     q: '¿Hacen visitas a domicilio o solo a empresas?',
@@ -36,39 +35,46 @@ const faqs = [
   }
 ];
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.a
+    }
+  }))
+};
+
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const toggle = (i: number) => {
-    setOpenIndex(openIndex === i ? null : i);
-  };
-
   return (
-    <section id="faq">
+    <section id="faq" aria-labelledby="faq-heading">
+      <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
       <div className="faq-container">
         <div className="section-header">
           <span className="section-badge">FAQ</span>
-          <h2 className="section-title">
+          <h2 id="faq-heading" className="section-title">
             Preguntas <span className="gradient-text">frecuentes</span>
           </h2>
-          <p className="section-desc">Resolvemos tus dudas sobre nuestros servicios de infraestructura TI.</p>
+          <p className="section-desc">Resolvemos tus dudas sobre nuestros servicios de infraestructura TI en Cali.</p>
         </div>
 
         <div className="faq-list">
           {faqs.map((faq, i) => (
-            <div
+            <details
               key={i}
-              className={`faq-item ${openIndex === i ? 'open' : ''}`}
-              onClick={() => toggle(i)}
+              className="faq-item"
             >
-              <div className="faq-question">
+              <summary className="faq-question">
                 <span className="faq-question-text">{faq.q}</span>
                 <IconChevronDown className="faq-icon" />
-              </div>
+              </summary>
               <div className="faq-answer">
                 <p className="faq-answer-text">{faq.a}</p>
               </div>
-            </div>
+            </details>
           ))}
         </div>
       </div>

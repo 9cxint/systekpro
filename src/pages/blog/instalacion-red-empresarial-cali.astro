@@ -1,0 +1,105 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const post = {
+  title: 'Guía Completa: Cómo Instalar una Red Empresarial en Cali',
+  description: 'Todo lo que necesitas saber sobre el diseño e instalación de redes empresariales. Desde el cableado estructurado hasta la configuración de switches y routers.',
+  date: '2026-05-15',
+  author: 'Equipo Sistek',
+  readTime: '8 min',
+  category: 'Redes',
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": post.title,
+  "description": post.description,
+  "datePublished": post.date,
+  "author": { "@type": "Organization", "name": post.author },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Sistek",
+    "logo": { "@type": "ImageObject", "url": "https://sistek.com.co/logo.png" }
+  }
+};
+---
+
+<Layout title={`${post.title} | Blog Sistek`} description={post.description}>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <main>
+    <article class="blog-article">
+      <div class="container">
+        <nav aria-label="Breadcrumb" class="breadcrumb">
+          <ol>
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li aria-current="page">{post.title}</li>
+          </ol>
+        </nav>
+
+        <header class="blog-post-header">
+          <div class="blog-post-meta">
+            <span class="blog-post-category">{post.category}</span>
+            <time datetime={post.date}>{new Date(post.date).toLocaleDateString('es-CO', { day: 'numeric', month: 'long', year: 'numeric' })}</time>
+            <span>{post.readTime} de lectura</span>
+          </div>
+          <h1>{post.title}</h1>
+          <p class="blog-post-intro">{post.description}</p>
+        </header>
+
+        <div class="blog-post-content">
+          <h2>1. Planificación de la red empresarial</h2>
+          <p>Antes de instalar cualquier cable o equipo, es fundamental planificar la arquitectura de red. Esto incluye definir la cantidad de usuarios, los servicios que se necesitan, la topología de red y los requisitos de seguridad.</p>
+          <p>En Cali, muchas empresas cometen el error de instalar redes sin planificación, lo que resulta en problemas de rendimiento, zonas sin cobertura y dificultades para escalar.</p>
+
+          <h2>2. Cableado estructurado: la base de todo</h2>
+          <p>El cableado estructurado es la columna vertebral de cualquier red empresarial. Recomendamos usar cable CAT6 como mínimo, o CAT6A si necesitas velocidades de 10 Gbps.</p>
+          <p>Una instalación profesional incluye: canalización, cableado, patch panels, rostros de red y organización en racks. Todo debe ser certificado con equipo profesional.</p>
+
+          <h2>3. Selección de equipos de red</h2>
+          <p>Los equipos de red principales son:</p>
+          <ul>
+            <li><strong>Router:</strong> Gestiona la conexión a internet y el tráfico entre redes.</li>
+            <li><strong>Switch:</strong> Conecta los dispositivos dentro de la red local. Los switches managed permiten VLANs y QoS.</li>
+            <li><strong>Access Points:</strong> Proporcionan conectividad WiFi. Para empresas, recomendamos APs empresariales con PoE.</li>
+            <li><strong>Firewall:</strong> Protege la red contra amenazas externas.</li>
+          </ul>
+
+          <h2>4. Configuración y seguridad</h2>
+          <p>Una vez instalados los equipos, la configuración es clave. Esto incluye VLANs para segmentar la red, QoS para priorizar tráfico crítico, firewall para seguridad y monitoreo para detectar problemas.</p>
+
+          <h2>5. Pruebas y documentación</h2>
+          <p>Finalmente, se realizan pruebas de rendimiento en cada punto de red y se entrega documentación completa: diagramas, inventario, credenciales y manual de operación.</p>
+
+          <div class="blog-cta-box">
+            <h3>¿Necesitas ayuda con tu red empresarial?</h3>
+            <p>En Sistek diseñamos, instalamos y configuramos redes empresariales en Cali. Contáctanos para una asesoría gratuita.</p>
+            <a href="/#contacto" class="btn-primary glow">Solicitar cotización</a>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+</Layout>
+
+<style>
+  .blog-article { padding: 8rem 0 4rem; }
+  .breadcrumb ol { display: flex; gap: 0.5rem; list-style: none; padding: 0; margin-bottom: 2rem; font-size: 0.875rem; color: hsl(var(--muted-foreground)); }
+  .breadcrumb li:not(:last-child)::after { content: '/'; margin-left: 0.5rem; }
+  .breadcrumb a { color: hsl(var(--primary)); }
+  .blog-post-header { max-width: 720px; margin: 0 auto 3rem; }
+  .blog-post-meta { display: flex; gap: 1rem; margin-bottom: 1.5rem; font-size: 0.875rem; color: hsl(var(--muted-foreground)); }
+  .blog-post-category { color: hsl(var(--primary)); font-weight: 600; }
+  .blog-post-header h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1.2; margin-bottom: 1.5rem; }
+  .blog-post-intro { font-size: 1.25rem; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+  .blog-post-content { max-width: 720px; margin: 0 auto; }
+  .blog-post-content h2 { font-size: 1.5rem; font-weight: 700; margin: 2.5rem 0 1rem; }
+  .blog-post-content p { color: hsl(var(--muted-foreground)); line-height: 1.8; margin-bottom: 1.25rem; }
+  .blog-post-content ul { margin: 1rem 0 1.5rem 1.5rem; }
+  .blog-post-content li { color: hsl(var(--muted-foreground)); line-height: 1.8; margin-bottom: 0.5rem; }
+  .blog-post-content strong { color: hsl(var(--foreground)); }
+  .blog-cta-box { padding: 2rem; border-radius: var(--radius-2xl); border: 1px solid hsl(var(--primary) / 0.3); background: hsl(var(--primary) / 0.05); margin-top: 3rem; text-align: center; }
+  .blog-cta-box h3 { font-size: 1.375rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .blog-cta-box p { color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem; }
+</style>

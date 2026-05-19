@@ -9,7 +9,6 @@ import "@/styles/process.css";
 import "@/styles/benefits.css";
 import "@/styles/faq.css";
 import "@/styles/cta.css";
-import "@/styles/contact.module.css";
 import "@/styles/footer.css";
 import Toaster from '../components/starwind/toast/Toaster.astro'
 
@@ -21,29 +20,39 @@ interface Props {
 }
 
 const {
-  title = "Sistek - Infraestructura TI & Redes en Cali",
-  description = "Sistek - Mantenimiento de computadores, instalación de redes empresariales, cableado estructurado y soporte técnico en Cali, Colombia.",
-  image = "/og-image.jpg",
+  title = "Sistek Pro - Infraestructura TI, Redes y Soporte Técnico en Cali",
+  description = "Sistek Pro: empresa líder en mantenimiento de computadores, instalación de redes empresariales, cableado estructurado y soporte técnico en Cali, Colombia. Cotización gratuita.",
+  image = "/og-image.svg",
   canonical = Astro.url.href
 } = Astro.props;
 
-const siteUrl = "https://sistek.com.co";
+const siteUrl = "https://sistekpro.vercel.app";
 const fullImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
 const fullCanonical = canonical.startsWith("http") ? canonical : `${siteUrl}${canonical}`;
+const currentPath = Astro.url.pathname;
 
-const jsonLd = {
+const breadcrumbs = [
+  { name: "Inicio", url: siteUrl },
+  ...(currentPath !== '/' ? [{ name: title.split(' | ')[0], url: `${siteUrl}${currentPath}` }] : [])
+];
+
+const jsonLdLocalBusiness = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Sistek",
-  "image": fullImage,
+  "alternateName": "Sistek Pro",
+  "image": `${siteUrl}/logo.png`,
+  "logo": `${siteUrl}/logo.png`,
   "description": description,
   "url": siteUrl,
-  "telephone": "+571234513541",
+  "telephone": "+57-123-4513541",
+  "email": "contacto@sistek.com.co",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Calle 41, Cra 31 #00",
     "addressLocality": "Cali",
     "addressRegion": "Valle del Cauca",
+    "postalCode": "760001",
     "addressCountry": "CO"
   },
   "geo": {
@@ -65,33 +74,111 @@ const jsonLd = {
       "closes": "13:00"
     }
   ],
-  "priceRange": "$$"
+  "priceRange": "$$",
+  "areaServed": {
+    "@type": "City",
+    "name": "Cali",
+    "sameAs": "https://es.wikipedia.org/wiki/Cali"
+  },
+  "sameAs": [
+    "https://www.instagram.com/sistek",
+    "https://www.facebook.com/sistek"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios TI",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mantenimiento de Computadores" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Instalación de Redes Empresariales" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cableado Estructurado" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Configuración de Routers y Switches" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Redes WiFi Empresariales" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Soporte Técnico" } }
+    ]
+  }
+};
+
+const jsonLdOrganization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Sistek",
+  "url": siteUrl,
+  "logo": `${siteUrl}/logo.png`,
+  "description": "Empresa de infraestructura TI, redes empresariales y soporte técnico en Cali, Colombia.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Cali",
+    "addressRegion": "Valle del Cauca",
+    "addressCountry": "CO"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+57-123-4513541",
+    "contactType": "customer service",
+    "areaServed": "CO",
+    "availableLanguage": "Spanish"
+  },
+  "sameAs": [
+    "https://www.instagram.com/sistek",
+    "https://www.facebook.com/sistek"
+  ]
+};
+
+const jsonLdWebSite = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Sistek",
+  "url": siteUrl,
+  "description": "Servicios de infraestructura TI, redes empresariales y soporte técnico en Cali.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": `${siteUrl}/?s={search_term_string}`,
+    "query-input": "required name=search_term_string"
+  }
+};
+
+const jsonLdBreadcrumbs = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": breadcrumbs.map((crumb, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "name": crumb.name,
+    "item": crumb.url
+  }))
 };
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es-CO">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
     <link rel="icon" type="image/svg+xml" href="/logo_icono.svg" />
-    <link rel="icon" href="/logo_icono.ico" />
+    <link rel="icon" type="image/x-icon" href="/logo_icono.ico" />
+    <link rel="apple-touch-icon" href="/logo_icono.png" />
     <meta name="generator" content={Astro.generator} />
-    
+
     <!-- SEO Core -->
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="keywords" content="mantenimiento computadores, instalación redes, cableado estructurado, soporte TI, sistek, Cali, Colombia, redes empresariales, wifi empresarial" />
     <meta name="author" content="Sistek" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
     <link rel="canonical" href={fullCanonical} />
-    
+
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="es-CO" href={fullCanonical} />
+    <link rel="alternate" hreflang="es" href={fullCanonical} />
+
     <!-- Google Verification -->
     <meta name="google-site-verification" content="bUWA640cYC5xTz1CRqp5SlH2r6aH8-E_nhgSWgb3T9I" />
+
     <!-- Theme -->
     <meta name="theme-color" id="theme-color" content="#0B1121" />
     <meta name="msapplication-TileColor" content="#0B1121" />
-    
+
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -100,34 +187,50 @@ const jsonLd = {
     <meta property="og:image" content={fullImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`Sistek - ${title}`} />
     <meta property="og:site_name" content="Sistek" />
     <meta property="og:locale" content="es_CO" />
-    
+
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={fullImage} />
-    
-    <!-- Mobile -->
+    <meta name="twitter:image:alt" content={`Sistek - ${title}`} />
+
+    <!-- Mobile / PWA -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    
-    <!-- Fonts -->
+    <meta name="apple-mobile-web-app-title" content="Sistek" />
+
+    <!-- Fonts: preload + display=swap -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    
+
     <!-- Structured Data -->
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-    
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLdLocalBusiness)} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLdOrganization)} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLdWebSite)} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLdBreadcrumbs)} />
+
+    <!-- Analytics: Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
     <script>
       (function() {
         var theme = localStorage.getItem('theme');
         var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
         if (theme === 'light' || (!theme && prefersLight)) {
           document.documentElement.classList.add('light');
-          var themeColorElement = document.getElementById('theme-color') as HTMLMetaElement;
+          var themeColorElement = document.getElementById('theme-color');
           if (themeColorElement) {
             themeColorElement.content = '#FFFFFF';
           }

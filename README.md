@@ -1,47 +1,52 @@
-# Astro Starter Kit: Basics
+# Sistek - Infraestructura TI & Redes en Cali
 
-```sh
-npm create astro@latest -- --template basics
+Sitio web profesional de **Sistek**, empresa especializada en infraestructura TI, redes empresariales y soporte técnico en Cali, Colombia.
+
+## Servicios
+
+- Mantenimiento de computadores
+- Instalación de redes empresariales
+- Cableado estructurado CAT6/CAT6A
+- Configuración de routers y switches
+- Redes WiFi empresariales
+- Soporte técnico presencial y remoto
+
+## Stack Tecnológico
+
+- **Framework**: Astro 6.x
+- **UI**: React 19.x + Tailwind CSS 4.x
+- **Icons**: Tabler Icons
+- **Forms**: FormSubmit (backendless)
+- **Analytics**: Google Analytics 4
+
+## Comandos
+
+```bash
+npm run dev      # Servidor local (localhost:4321)
+npm run build    # Build de producción
+npm run preview  # Preview del build
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Estructura
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```
+src/
+├── components/       # Componentes UI (Astro + React)
+├── layouts/          # Layouts con SEO completo
+├── pages/            # Rutas y páginas
+│   ├── servicios/    # Páginas individuales por servicio
+│   └── blog/         # Blog y artículos
+├── styles/           # CSS por componente
+└── content/          # Contenido (blog posts)
+public/               # Assets estáticos
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## SEO Implementado
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-# systekpro
+- Meta tags avanzados (OG, Twitter Cards, hreflang)
+- Structured data JSON-LD (LocalBusiness, Organization, Service, FAQPage, BreadcrumbList)
+- Sitemap.xml dinámico
+- robots.txt
+- Canonical URLs
+- Semantic HTML + ARIA
+- Breadcrumbs

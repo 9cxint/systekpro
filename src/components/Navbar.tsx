@@ -57,15 +57,15 @@ export default function Navbar() {
   }, [menuOpen]);
 
   return (
-    <header id="navbar" className={scrolled ? 'glass-strong' : ''}>
+    <header id="navbar" className={scrolled ? 'glass-strong' : ''} role="banner">
       <div className="nav-container">
         <div className="nav-inner">
-          <a href="#" className="nav-logo">
-            <img src="/logo_icono.png" alt="Sistek" className="nav-logo-icon" />
-            <img src="/logo_name.png" alt="Sistek Pro" className="nav-logo-name" />
+          <a href="/" className="nav-logo" aria-label="Sistek - Inicio">
+            <img src="/logo_icono.png" alt="Sistek logo" className="nav-logo-icon" width="32" height="32" />
+            <img src="/logo_name.png" alt="Sistek" className="nav-logo-name" width="100" height="32" />
           </a>
 
-          <nav className="nav-links">
+          <nav className="nav-links" aria-label="Navegación principal">
             {navLinks.map(link => (
               <a key={link.href} href={link.href}>
                 {link.label}
@@ -75,12 +75,12 @@ export default function Navbar() {
 
           <div className="nav-actions">
             <ThemeToggle />
-            <a href="tel:+571234513541" className="nav-phone">
+            <a href="tel:+571234513541" className="nav-phone" aria-label="Llamar a Sistek">
               <span className="nav-phone-inner">
-                <svg className="nav-phone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg className="nav-phone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                 </svg>
-                <span>123 4513541</span>
+                <span>+57 123 4513541</span>
               </span>
             </a>
             <a href="#contacto" className="nav-cta">
@@ -95,6 +95,7 @@ export default function Navbar() {
               onClick={toggleMenu}
               aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
               aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
             >
               {menuOpen ? <IconX className="mobile-menu-btn-icon" /> : <IconMenu2 className="mobile-menu-btn-icon" />}
             </button>
@@ -102,18 +103,18 @@ export default function Navbar() {
         </div>
       </div>
 
-
       <div
         className={`mobile-menu-overlay${menuOpen ? ' active' : ''}`}
         onClick={closeMenu}
+        aria-hidden="true"
       />
 
       <nav
+        id="mobile-menu"
         className={`mobile-menu${menuOpen ? ' active' : ''}`}
         aria-label="Navegación móvil"
         onClick={(e) => e.stopPropagation()}
       >
-
         <div className="mobile-menu-inner">
           {navLinks.map(link => (
             <a key={link.href} href={link.href} onClick={handleLinkClick}>

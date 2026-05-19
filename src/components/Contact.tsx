@@ -7,9 +7,6 @@ import {
 } from '@tabler/icons-react'
 
 import styles from '../styles/contact.module.css'
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import toast, { Toaster } from 'react-hot-toast'
 
 type FormData = {
   nombre: string
@@ -20,435 +17,206 @@ type FormData = {
 }
 
 function Contact() {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const form = e.currentTarget
+    const formData = new FormData(form)
+    const data = Object.fromEntries(formData) as FormData
 
-  const {
-    register,
-    handleSubmit,
-    formState: {
-      errors,
-      isSubmitting
-    },
-    reset
-  } = useForm<FormData>()
+    if (!data.nombre || !data.email || !data.numero || !data.servicio || !data.message) {
+      alert('Por favor completa todos los campos')
+      return
+    }
 
-  const onSubmit = async (data: FormData) => {
+    if (data.nombre.length < 3) {
+      alert('El nombre debe tener al menos 3 caracteres')
+      return
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+      alert('Ingresa un correo electrónico válido')
+      return
+    }
+
+    if (data.numero.length < 7) {
+      alert('Ingresa un número de teléfono válido')
+      return
+    }
+
+    if (data.message.length < 10) {
+      alert('El mensaje es demasiado corto')
+      return
+    }
+
     try {
-      toast.success('Tu mensaje fue enviado con éxito')
-      reset()
+      const response = await fetch('https://formsubmit.co/ajax/contacto@sistek.com.co', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: `Nuevo contacto desde sistek.com.co - ${data.servicio}`,
+          _captcha: 'false',
+          _template: 'table',
+          nombre: data.nombre,
+          email: data.email,
+          telefono: data.numero,
+          servicio: data.servicio,
+          mensaje: data.message,
+        }),
+      })
+
+      if (response.ok) {
+        alert('¡Mensaje enviado con éxito! Te contactaremos pronto.')
+        form.reset()
+      } else {
+        alert('No se pudo enviar el mensaje. Intenta de nuevo o contáctanos por WhatsApp.')
+      }
     } catch (error) {
-      toast.error('No se pudo enviar el mensaje')
-      console.error(error)
+      alert('Error de conexión. Intenta de nuevo o contáctanos por WhatsApp.')
     }
   }
 
   return (
-    <>
-      <Toaster
-        position="bottom-right"
-        toastOptions={{
-          style: {
-            background: '#1e293b',
-            color: '#f8fafc',
-            border: '1px solid #334155',
-          },
-          success: {
-            style: {
-              borderColor: '#22c55e',
-            },
-          },
-          error: {
-            style: {
-              borderColor: '#ef4444',
-            },
-          },
-        }}
-      />
-      <section id="contacto" className={styles.contacto} >
-
-        <div className={styles.container}>
-
-          <div className={styles.sectionHeader}>
-            <span className={styles.sectionBadge}>
-              Contacto
-            </span>
-
-            <h2 className={styles.sectionTitle}>
-              Hablemos de tu
-              <span className={styles.gradientText}>
-                {' '}proyecto
-              </span>
-            </h2>
-
-            <p className={styles.sectionDesc}>
-              Cuéntanos qué necesitas y te enviaremos una propuesta personalizada.
-            </p>
-          </div>
-
-          <div className={styles.contactGrid}>
-
-            <form
-              className={styles.contactFormm}
-              onSubmit={handleSubmit(onSubmit)}
-            >
-
-              <div className={styles.formmRow}>
-
-                {/* Nombre */}
-
-                <div className={styles.formmGroup}>
-
-                  <label
-                    htmlFor="name"
-                    className={styles.formmLabel}
-                  >
-                    Nombre completo
-                  </label>
-
-                  <input
-                    type="text"
-                    id="name"
-
-                    className={styles.formmInput}
-
-                    placeholder="Tu nombre"
-
-                    autoComplete="name"
-
-                    {...register('nombre', {
-                      required: 'El nombre es obligatorio',
-
-                      minLength: {
-                        value: 3,
-                        message: 'Mínimo 3 caracteres'
-                      }
-                    })}
-                  />
-
-                  {
-                    errors.nombre && (
-                      <span className={styles.error}>
-                        {errors.nombre.message}
-                      </span>
-                    )
-                  }
-
-                </div>
-
-                {/* Email */}
-
-                <div className={styles.formmGroup}>
-
-                  <label
-                    htmlFor="email"
-                    className={styles.formmLabel}
-                  >
-                    Correo electrónico
-                  </label>
-
-                  <input
-                    type="email"
-                    id="email"
-
-                    className={styles.formmInput}
-
-                    placeholder="tu@correo.com"
-
-                    autoComplete="email"
-
-                    {...register('email', {
-                      required: 'El correo es obligatorio',
-
-                      pattern: {
-                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                        message: 'Correo inválido'
-                      }
-                    })}
-                  />
-
-                  {
-                    errors.email && (
-                      <span className={styles.error}>
-                        {errors.email.message}
-                      </span>
-                    )
-                  }
-
-                </div>
-
-              </div>
-
-              {/* Teléfono */}
-
-              <div className={styles.formmGroup}>
-
-                <label
-                  htmlFor="phone"
-                  className={styles.formmLabel}
-                >
-                  Teléfono
-                </label>
-
-                <input
-                  type="tel"
-                  id="phone"
-
-                  className={styles.formmInput}
-
-                  placeholder="+57 300 123 4567"
-
-                  autoComplete="tel"
-
-                  {...register('numero', {
-                    required: 'El teléfono es obligatorio',
-
-                    minLength: {
-                      value: 7,
-                      message: 'Número demasiado corto'
-                    }
-                  })}
-                />
-
-                {
-                  errors.numero && (
-                    <span className={styles.error}>
-                      {errors.numero.message}
-                    </span>
-                  )
-                }
-
-              </div>
-
-              {/* Servicio */}
-
-              <div className={styles.formmGroup}>
-
-                <label
-                  htmlFor="service"
-                  className={styles.formmLabel}
-                >
-                  Servicio de interés
-                </label>
-
-                <select
-                  id="service"
-
-                  className={styles.formmSelect}
-
-                  {...register('servicio', {
-                    required: 'Selecciona un servicio'
-                  })}
-                >
-
-                  <option value="">
-                    Selecciona un servicio
-                  </option>
-
-                  <option value="mantenimiento">
-                    Mantenimiento de equipos
-                  </option>
-
-                  <option value="redes">
-                    Instalación de redes
-                  </option>
-
-                  <option value="cableado">
-                    Cableado estructurado
-                  </option>
-
-                  <option value="configuracion">
-                    Configuración de routers/switches
-                  </option>
-
-                  <option value="soporte">
-                    Soporte técnico
-                  </option>
-
-                  <option value="wifi">
-                    Redes inalámbricas
-                  </option>
-
-                  <option value="otro">
-                    Otro
-                  </option>
-
-                </select>
-
-                {
-                  errors.servicio && (
-                    <span className={styles.error}>
-                      {errors.servicio.message}
-                    </span>
-                  )
-                }
-
-              </div>
-
-              {/* Mensaje */}
-
-              <div className={styles.formmGroup}>
-
-                <label
-                  htmlFor="message"
-                  className={styles.formmLabel}
-                >
-                  Mensaje
-                </label>
-
-                <textarea
-                  id="message"
-
-                  rows={4}
-
-                  className={styles.formmTextarea}
-
-                  placeholder="Cuéntanos sobre tu proyecto..."
-
-                  {...register('message', {
-                    required: 'El mensaje es obligatorio',
-
-                    minLength: {
-                      value: 10,
-                      message: 'El mensaje es demasiado corto'
-                    }
-                  })}
-                />
-
-                {
-                  errors.message && (
-                    <span className={styles.error}>
-                      {errors.message.message}
-                    </span>
-                  )
-                }
-
-              </div>
-
-              {/* Botón */}
-
-              <button
-                type="submit"
-
-                disabled={isSubmitting}
-
-                className={styles.formmBtn}
-              >
-
-                {
-                  isSubmitting
-                    ? 'Enviando...'
-                    : 'Enviar mensaje'
-                }
-
-                <IconSend />
-
-              </button>
-
-            </form>
-
-            {/* Información */}
-
-            <div className={styles.contactInfo}>
-
-              <div className={styles.contactInfoList}>
-
-                <div className={styles.contactInfoItem}>
-
-                  <div className={`${styles.contactInfoIcon} ${styles.primary}`}>
-                    <IconPhone />
-                  </div>
-
-                  <div>
-                    <h3 className={styles.contactInfoLabel}>
-                      Teléfono
-                    </h3>
-
-                    <p className={styles.contactInfoValue}>
-                      +57 123 4513541
-                    </p>
-
-                    <p className={styles.contactInfoValue}>
-                      +57 123 4513541
-                    </p>
-                  </div>
-
-                </div>
-
-                <div className={styles.contactInfoItem}>
-
-                  <div className={`${styles.contactInfoIcon} ${styles.accent}`}>
-                    <IconMail />
-                  </div>
-
-                  <div>
-                    <h3 className={styles.contactInfoLabel}>
-                      Correo electrónico
-                    </h3>
-
-                    <p className={styles.contactInfoValue}>
-                      contacto@sistek.com.co
-                    </p>
-
-                    <p className={styles.contactInfoValue}>
-                      soporte@sistek.com.co
-                    </p>
-                  </div>
-
-                </div>
-
-                <div className={styles.contactInfoItem}>
-
-                  <div className={`${styles.contactInfoIcon} ${styles.primary}`}>
-                    <IconMapPin />
-                  </div>
-
-                  <div>
-                    <h3 className={styles.contactInfoLabel}>
-                      Ubicación
-                    </h3>
-
-                    <p className={styles.contactInfoValue}>
-                      Calle 41, Cra 31 #00
-                    </p>
-
-                    <p className={styles.contactInfoValue}>
-                      Cali, Valle del Cauca
-                    </p>
-                  </div>
-
-                </div>
-
-                <div className={styles.contactInfoItem}>
-
-                  <div className={`${styles.contactInfoIcon} ${styles.accent}`}>
-                    <IconClock />
-                  </div>
-
-                  <div>
-                    <h3 className={styles.contactInfoLabel}>
-                      Horario
-                    </h3>
-
-                    <p className={styles.contactInfoValue}>
-                      Lun - Vie: 8:00 - 18:00
-                    </p>
-
-                    <p className={styles.contactInfoValue}>
-                      Sáb: 9:00 - 13:00
-                    </p>
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
+    <section id="contacto" className={styles.contacto}>
+      <div className={styles.container}>
+        <div className={styles.sectionHeader}>
+          <span className={styles.sectionBadge}>Contacto</span>
+          <h2 className={styles.sectionTitle}>
+            Hablemos de tu<span className={styles.gradientText}> proyecto</span>
+          </h2>
+          <p className={styles.sectionDesc}>
+            Cuéntanos qué necesitas y te enviaremos una propuesta personalizada.
+          </p>
         </div>
 
-      </section>
-    </>
+        <div className={styles.contactGrid}>
+          <form
+            className={styles.contactFormm}
+            onSubmit={handleSubmit}
+            noValidate
+          >
+            <div className={styles.formmRow}>
+              <div className={styles.formmGroup}>
+                <label htmlFor="nombre" className={styles.formmLabel}>Nombre completo</label>
+                <input
+                  type="text"
+                  id="nombre"
+                  name="nombre"
+                  className={styles.formmInput}
+                  placeholder="Tu nombre"
+                  autoComplete="name"
+                  required
+                  minLength={3}
+                />
+              </div>
+
+              <div className={styles.formmGroup}>
+                <label htmlFor="email" className={styles.formmLabel}>Correo electrónico</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  className={styles.formmInput}
+                  placeholder="tu@correo.com"
+                  autoComplete="email"
+                  required
+                />
+              </div>
+            </div>
+
+            <div className={styles.formmGroup}>
+              <label htmlFor="numero" className={styles.formmLabel}>Teléfono</label>
+              <input
+                type="tel"
+                id="numero"
+                name="numero"
+                className={styles.formmInput}
+                placeholder="+57 300 123 4567"
+                autoComplete="tel"
+                required
+                minLength={7}
+              />
+            </div>
+
+            <div className={styles.formmGroup}>
+              <label htmlFor="servicio" className={styles.formmLabel}>Servicio de interés</label>
+              <select id="servicio" name="servicio" className={styles.formmSelect} required>
+                <option value="">Selecciona un servicio</option>
+                <option value="mantenimiento">Mantenimiento de equipos</option>
+                <option value="redes">Instalación de redes</option>
+                <option value="cableado">Cableado estructurado</option>
+                <option value="configuracion">Configuración de routers/switches</option>
+                <option value="soporte">Soporte técnico</option>
+                <option value="wifi">Redes inalámbricas</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+
+            <div className={styles.formmGroup}>
+              <label htmlFor="message" className={styles.formmLabel}>Mensaje</label>
+              <textarea
+                id="message"
+                name="message"
+                rows={4}
+                className={styles.formmTextarea}
+                placeholder="Cuéntanos sobre tu proyecto..."
+                required
+                minLength={10}
+              />
+            </div>
+
+            <button type="submit" className={styles.formmBtn}>
+              Enviar mensaje
+              <IconSend />
+            </button>
+          </form>
+
+          <div className={styles.contactInfo}>
+            <div className={styles.contactInfoList}>
+              <div className={styles.contactInfoItem}>
+                <div className={`${styles.contactInfoIcon} ${styles.primary}`}>
+                  <IconPhone />
+                </div>
+                <div>
+                  <h3 className={styles.contactInfoLabel}>Teléfono</h3>
+                  <a href="tel:+571234513541" className={styles.contactInfoValue}>+57 123 4513541</a>
+                </div>
+              </div>
+
+              <div className={styles.contactInfoItem}>
+                <div className={`${styles.contactInfoIcon} ${styles.accent}`}>
+                  <IconMail />
+                </div>
+                <div>
+                  <h3 className={styles.contactInfoLabel}>Correo electrónico</h3>
+                  <a href="mailto:contacto@sistek.com.co" className={styles.contactInfoValue}>contacto@sistek.com.co</a>
+                </div>
+              </div>
+
+              <div className={styles.contactInfoItem}>
+                <div className={`${styles.contactInfoIcon} ${styles.primary}`}>
+                  <IconMapPin />
+                </div>
+                <div>
+                  <h3 className={styles.contactInfoLabel}>Ubicación</h3>
+                  <p className={styles.contactInfoValue}>Calle 41, Cra 31 #00, Cali, Valle del Cauca</p>
+                </div>
+              </div>
+
+              <div className={styles.contactInfoItem}>
+                <div className={`${styles.contactInfoIcon} ${styles.accent}`}>
+                  <IconClock />
+                </div>
+                <div>
+                  <h3 className={styles.contactInfoLabel}>Horario</h3>
+                  <p className={styles.contactInfoValue}>Lun - Vie: 8:00 - 18:00</p>
+                  <p className={styles.contactInfoValue}>Sáb: 9:00 - 13:00</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   )
 }
 

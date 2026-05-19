@@ -124,26 +124,19 @@
 }
 
 @media (min-width: 1024px) {
-  .hero-grid { gap: 4rem; }
+  .hero-grid {
+    gap: 4rem;
+  }
 }
 
 .hero-text {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1rem;
 }
 
-@media (min-width: 640px) {
-  .hero-text {
-    gap: 1.5rem;
-  }
-}
 
-@media (min-width: 1024px) {
-  .hero-text {
-    gap: 2rem;
-  }
-}
+
 
 .hero-badge {
   display: inline-flex;
