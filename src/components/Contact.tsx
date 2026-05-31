@@ -78,7 +78,6 @@ function Contact() {
           <form
             className={styles.contactFormm}
             action="https://formspree.io/f/xpqngavp"
-            onSubmit={(e) => handleSubmit(e)}
             method='POST'
             noValidate
           >
