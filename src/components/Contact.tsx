@@ -77,7 +77,9 @@ function Contact() {
         <div className={styles.contactGrid}>
           <form
             className={styles.contactFormm}
-            onSubmit={handleSubmit}
+            action="https://formspree.io/f/xpqngavp"
+            onSubmit={(e) => handleSubmit(e)}
+            method='POST'
             noValidate
           >
             <div className={styles.formmRow}>
