@@ -14,7 +14,7 @@ const faqs = [
     a: 'Instalamos cableado categoría CAT6 y CAT6A para redes empresariales, incluyendo patch panels, rostros y organización en racks. Todo nuestro trabajo se entrega probado y funcionando.'
   },
   {
-    q: '¿Dan soporte remoto o solo presencial?',
+    q: '¿Ofrecen soporte remoto o solo presencial?',
     a: 'Ofrecemos ambos. El soporte remoto es ideal para problemas de software y configuración. Cuando se requiere atención presencial, coordinamos una visita a tu ubicación en Cali.'
   },
   {
@@ -58,7 +58,7 @@ export default function FAQ() {
           <h2 id="faq-heading" className="section-title">
             Preguntas <span className="gradient-text">frecuentes</span>
           </h2>
-          <p className="section-desc">Resolvemos tus dudas sobre nuestros servicios de infraestructura TI en Cali.</p>
+          <p className="section-desc">Resolvemos tus dudas sobre nuestros servicios de infraestructura tecnológica en Cali.</p>
         </div>
 
         <div className="faq-list">

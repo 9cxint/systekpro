@@ -1,6 +1,6 @@
-# Sistek - Infraestructura TI & Redes en Cali
+# Sistek - Infraestructura tecnológica & Redes en Cali
 
-Sitio web profesional de **Sistek**, empresa especializada en infraestructura TI, redes empresariales y soporte técnico en Cali, Colombia.
+Sitio web profesional de **Sistek**, empresa especializada en infraestructura tecnológica, redes empresariales y soporte técnico en Cali, Colombia.
 
 ## Servicios
 
