@@ -10,7 +10,6 @@ import WhatsAppFloat from '@/components/WhatsAppFloat.astro';
   title="Sobre Nosotros | Sistek Cali"
   description="Conoce Sistek, tu socio en infraestructura tecnológica en Cali, Colombia. Profesionales en mantenimiento de equipos, redes empresariales y cableado estructurado."
 >
-  <Navbar client:visible />
   <main>
     <section class="about-hero">
       <div class="container">
@@ -42,28 +41,28 @@ import WhatsAppFloat from '@/components/WhatsAppFloat.astro';
             </p>
             <div class="about-grid-2x2">
               <div class="about-feature">
-                <IconMapPin class="about-feature-icon primary" />
+                <IconMapPin className="about-feature-icon primary" />
                 <div>
                   <div class="about-feature-title">Cali, Colombia</div>
                   <div class="about-feature-desc">Servicio presencial en Cali y área metropolitana del Valle del Cauca</div>
                 </div>
               </div>
               <div class="about-feature">
-                <IconUsers class="about-feature-icon accent" />
+                <IconUsers className="about-feature-icon accent" />
                 <div>
                   <div class="about-feature-title">Atención personalizada</div>
                   <div class="about-feature-desc">Cada cliente recibe un trato único, dedicado y profesional</div>
                 </div>
               </div>
               <div class="about-feature">
-                <IconHeadset class="about-feature-icon primary" />
+                <IconHeadset className="about-feature-icon primary" />
                 <div>
                   <div class="about-feature-title">Soporte continuo</div>
                   <div class="about-feature-desc">Acompañamiento técnico antes, durante y después de cada proyecto</div>
                 </div>
               </div>
               <div class="about-feature">
-                <IconDeviceLaptop class="about-feature-icon accent" />
+                <IconDeviceLaptop className="about-feature-icon accent" />
                 <div>
                   <div class="about-feature-title">Equipo certificado</div>
                   <div class="about-feature-desc">Técnicos capacitados y en constante actualización tecnológica</div>
@@ -96,7 +95,6 @@ import WhatsAppFloat from '@/components/WhatsAppFloat.astro';
       </div>
     </section>
   </main>
-  <Footer />
   <WhatsAppFloat />
 </Layout>
 
