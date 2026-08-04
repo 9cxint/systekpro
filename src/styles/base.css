@@ -1,4 +1,4 @@
-:root {
+/*:root {
   --background: 222 47% 11%;
   --foreground: 210 40% 98%;
   --card: 222 47% 19%;
@@ -25,29 +25,100 @@
   --radius-lg: calc(var(--radius) + 0.25rem);
   --radius-xl: calc(var(--radius) + 0.5rem);
   --radius-2xl: calc(var(--radius) + 0.75rem);
+}*/
+:root {
+  /* Fondo */
+  --background: 205 60% 94%;
+  --foreground: 208 58% 16%;
+
+  /* Tarjetas */
+  --card: 0 0% 100%;
+  --card-foreground: 208 58% 16%;
+
+  /* Botón principal */
+  --primary: 192 82% 48%;
+  --primary-foreground: 0 0% 100%;
+
+  /* Elementos secundarios */
+  --secondary: 201 58% 88%;
+  --secondary-foreground: 208 58% 20%;
+
+  /* Color de acento */
+  --accent: 190 90% 46%;
+  --accent-foreground: 0 0% 100%;
+
+  /* Fondos suaves */
+  --muted: 202 55% 91%;
+  --muted-foreground: 205 28% 40%;
+
+  /* Estados */
+  --success: 154 67% 44%;
+  --warning: 38 92% 52%;
+  --error: 0 72% 58%;
+
+  /* Bordes */
+  --border: 201 40% 82%;
+  --input: 201 45% 88%;
+  --ring: 192 82% 48%;
+
+  /* Radios */
+  --radius: 0.75rem;
+
+  --primary-glow: 192 82% 58%;
+  --accent-glow: 187 85% 55%;
+
+  --radius-sm: calc(var(--radius) - 0.25rem);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 0.25rem);
+  --radius-xl: calc(var(--radius) + 0.5rem);
+  --radius-2xl: calc(var(--radius) + 0.75rem);
 }
 
 html.light {
-  --background: 0 0% 100%;
-  --foreground: 222 47% 11%;
-  --card: 210 40% 92%;
-  --card-foreground: 222 47% 11%;
-  --primary: 217 91% 48%;
+  --background: 205 60% 94%;
+  --foreground: 208 58% 16%;
+
+  /* Tarjetas */
+  --card: 0 0% 100%;
+  --card-foreground: 208 58% 16%;
+
+  /* Botón principal */
+  --primary: 192 82% 48%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 215 25% 80%;
-  --secondary-foreground: 222 47% 11%;
-  --accent: 187 85% 38%;
+
+  /* Elementos secundarios */
+  --secondary: 201 58% 88%;
+  --secondary-foreground: 208 58% 20%;
+
+  /* Color de acento */
+  --accent: 190 90% 46%;
   --accent-foreground: 0 0% 100%;
-  --muted: 210 40% 90%;
-  --muted-foreground: 215 20% 46%;
-  --success: 160 84% 35%;
-  --warning: 38 92% 45%;
-  --error: 0 84% 55%;
-  --border: 214 32% 78%;
-  --input: 214 32% 80%;
-  --ring: 217 91% 48%;
-  --primary-glow: 217 91% 48%;
-  --accent-glow: 187 85% 38%;
+
+  /* Fondos suaves */
+  --muted: 202 55% 91%;
+  --muted-foreground: 205 28% 40%;
+
+  /* Estados */
+  --success: 154 67% 44%;
+  --warning: 38 92% 52%;
+  --error: 0 72% 58%;
+
+  /* Bordes */
+  --border: 201 40% 82%;
+  --input: 201 45% 88%;
+  --ring: 192 82% 48%;
+
+  /* Radios */
+  --radius: 0.75rem;
+
+  --primary-glow: 192 82% 58%;
+  --accent-glow: 187 85% 55%;
+
+  --radius-sm: calc(var(--radius) - 0.25rem);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 0.25rem);
+  --radius-xl: calc(var(--radius) + 0.5rem);
+  --radius-2xl: calc(var(--radius) + 0.75rem);
 }
 
 * {
@@ -73,6 +144,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 body.menu-open {

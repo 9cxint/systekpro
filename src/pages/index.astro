@@ -1,27 +1,33 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar';
-import Hero from '../components/Hero.astro';
-import Services from '../components/Services.astro';
-import Process from '../components/Process.astro';
-import Benefits from '../components/Benefits.astro';
-import Testimonials from '../components/Testimonials.astro';
-import FAQ from '../components/FAQ';
-import CTA from '../components/CTA.astro';
-import Contact from '../components/Contact.tsx';
-import Footer from '@/components/Footer.astro';
-import WhatsAppFloat from '@/components/WhatsAppFloat.astro';
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero.astro";
+import Heroj from "../components/hero-j.astro";
+import Services from "../components/Services.astro";
+import Process from "../components/Process.astro";
+import Benefits from "../components/Benefits.astro";
+import Testimonials from "../components/Testimonials.astro";
+import FAQ from "../components/FAQ";
+import CTA from "../components/CTA.astro";
+import Contact from "../components/Contact.tsx";
+import Footer from "@/components/Footer.astro";
+import WhatsAppFloat from "@/components/WhatsAppFloat.astro";
+import ServicesJ from "@/components/ServicesCarousel/services";
 ---
 
 <Layout>
-  <Navbar client:visible />
-  <Hero />
-  <Services />
-  <Process />
-  <Benefits />
-  <FAQ client:visible />
-  <CTA />
-  <Contact client:visible />
-  <Footer />
-  <WhatsAppFloat />
+    <Navbar client:visible />
+    <div class="body-visible">
+      <Heroj />
+      <ServicesJ client:load />
+        <Services />
+        <Process />
+        <Benefits />
+        <FAQ client:visible />
+        <CTA />
+        <Contact client:visible />
+        <Footer />
+        <WhatsAppFloat />
+    </div>
 </Layout>
+
