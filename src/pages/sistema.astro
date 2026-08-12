@@ -1,0 +1,17 @@
+---
+import Layout from "@/layouts/Layout.astro"
+---
+
+<Layout title="Sistema" description="Sistema de administración">
+  <div id="sistema"></div>
+</Layout>
+
+<script>
+  const stored = localStorage.getItem("sistek.session")
+  if (!stored) {
+    window.location.replace("/auth")
+  } else {
+    const { user } = JSON.parse(stored)
+    document.getElementById("sistema").textContent = `Hola ${user.role}`
+  }
+</script>
